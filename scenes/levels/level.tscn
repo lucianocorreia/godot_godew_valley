@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=16 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Texture2D" uid="uid://b1cmu3aai85qc" path="res://graphics/tilesets/grass.png" id="1_bovvr"]
+[ext_resource type="Script" uid="uid://crdbsib38ohef" path="res://scenes/levels/level.gd" id="1_urvlt"]
 [ext_resource type="PackedScene" uid="uid://b0mnopqlx5dix" path="res://scenes/characters/player.tscn" id="2_b2cq8"]
 [ext_resource type="Texture2D" uid="uid://cpjr8yl2yentc" path="res://graphics/tilesets/soil.png" id="2_xb4v1"]
 [ext_resource type="Texture2D" uid="uid://bhd33vu4qpbph" path="res://graphics/tilesets/water.png" id="3_xb4v1"]
+[ext_resource type="Texture2D" uid="uid://vrdy2gp08qay" path="res://graphics/tilesets/soil_water.png" id="5_d4w6o"]
+[ext_resource type="PackedScene" uid="uid://d2530w2lrixv4" path="res://scenes/objects/tree.tscn" id="7_mbbpy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4w6o"]
 texture = ExtResource("3_xb4v1")
@@ -22,15 +25,15 @@ texture = ExtResource("1_bovvr")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -0.5395756, 0, 8, 0, 8, -8, -8, -8)
-0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(0, 8, -8, 8, 0, 0)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -2, -4, 8, -4, 8, -8, -8, -8)
+0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-2, 8, -8, 8, -2, -4)
 0:0/0/terrains_peering_bit/right_side = 0
 0:0/0/terrains_peering_bit/bottom_right_corner = 0
 0:0/0/terrains_peering_bit/bottom_side = 0
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/terrain = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 0, 8, 0, 8, -8, -8, -8)
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -4, 8, -8, -8, -8)
 1:0/0/terrains_peering_bit/right_side = 0
 1:0/0/terrains_peering_bit/bottom_right_corner = 0
 1:0/0/terrains_peering_bit/bottom_side = 0
@@ -39,8 +42,8 @@ texture = ExtResource("1_bovvr")
 2:0/0 = 0
 2:0/0/terrain_set = 0
 2:0/0/terrain = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0, -0.5395756, 0, 8, 8, 8, 8, -8)
-2:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-8, 0, -8, -8, 0, 0)
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -4, 8, -8, -8, -8)
+2:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(2, -4, 2, 8, 8, 8, 8, -4)
 2:0/0/terrains_peering_bit/bottom_side = 0
 2:0/0/terrains_peering_bit/bottom_left_corner = 0
 2:0/0/terrains_peering_bit/left_side = 0
@@ -107,6 +110,7 @@ texture = ExtResource("1_bovvr")
 1:1/0/terrains_peering_bit/top_left_corner = 0
 1:1/0/terrains_peering_bit/top_side = 0
 1:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0/custom_data_0 = true
 2:1/0 = 0
 2:1/0/terrain_set = 0
 2:1/0/terrain = 0
@@ -335,6 +339,7 @@ texture = ExtResource("1_bovvr")
 0:4/0/terrains_peering_bit/top_left_corner = 0
 0:4/0/terrains_peering_bit/top_side = 0
 0:4/0/terrains_peering_bit/top_right_corner = 0
+0:4/0/custom_data_0 = true
 1:4/0 = 0
 1:4/0/terrain_set = 0
 1:4/0/terrain = 0
@@ -347,6 +352,7 @@ texture = ExtResource("1_bovvr")
 1:4/0/terrains_peering_bit/top_left_corner = 0
 1:4/0/terrains_peering_bit/top_side = 0
 1:4/0/terrains_peering_bit/top_right_corner = 0
+1:4/0/custom_data_0 = true
 2:4/0 = 0
 2:4/0/terrain_set = 0
 2:4/0/terrain = 0
@@ -359,6 +365,7 @@ texture = ExtResource("1_bovvr")
 2:4/0/terrains_peering_bit/top_left_corner = 0
 2:4/0/terrains_peering_bit/top_side = 0
 2:4/0/terrains_peering_bit/top_right_corner = 0
+2:4/0/custom_data_0 = true
 3:4/0 = 0
 3:4/0/terrain_set = 0
 3:4/0/terrain = 0
@@ -371,6 +378,7 @@ texture = ExtResource("1_bovvr")
 3:4/0/terrains_peering_bit/top_left_corner = 0
 3:4/0/terrains_peering_bit/top_side = 0
 3:4/0/terrains_peering_bit/top_right_corner = 0
+3:4/0/custom_data_0 = true
 4:4/0 = 0
 4:4/0/terrain_set = 0
 4:4/0/terrain = 0
@@ -415,6 +423,8 @@ physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Grass"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+custom_data_layer_0/name = "farmable"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_b2cq8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_urvlt"]
@@ -803,7 +813,17 @@ terrain_set_0/terrain_0/name = "Soil"
 terrain_set_0/terrain_0/color = Color(0.04573275, 0.41735014, 0.5836341, 1)
 sources/0 = SubResource("TileSetAtlasSource_urvlt")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mbbpy"]
+texture = ExtResource("5_d4w6o")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_urvlt"]
+sources/0 = SubResource("TileSetAtlasSource_mbbpy")
+
 [node name="Level" type="Node2D"]
+script = ExtResource("1_urvlt")
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -819,8 +839,17 @@ tile_set = SubResource("TileSet_xb4v1")
 tile_map_data = PackedByteArray("AAARABgAAAACAAIAAAARABcAAAACAAAAAAAQABgAAAABAAIAAAAQABcAAAABAAAAAAAPABgAAAABAAIAAAAPABcAAAABAAAAAAAOABgAAAABAAIAAAAOABcAAAABAAAAAAANABgAAAABAAIAAAANABcAAAABAAAAAAAMABgAAAABAAIAAAAMABcAAAABAAAAAAALABgAAAABAAIAAAALABcAAAABAAAAAAAKABgAAAAAAAIAAAAKABcAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_d4w6o")
 
+[node name="SoilWaterLayer" type="TileMapLayer" parent="Layers"]
+modulate = Color(1, 1, 1, 0.7254902)
+tile_set = SubResource("TileSet_urvlt")
+
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Player" parent="Objects" instance=ExtResource("2_b2cq8")]
 position = Vector2(186, 342)
+
+[node name="Tree" parent="Objects" instance=ExtResource("7_mbbpy")]
+position = Vector2(116, 360)
+
+[connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]
