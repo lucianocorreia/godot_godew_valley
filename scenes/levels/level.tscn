@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=17 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Texture2D" uid="uid://b1cmu3aai85qc" path="res://graphics/tilesets/grass.png" id="1_bovvr"]
 [ext_resource type="Script" uid="uid://crdbsib38ohef" path="res://scenes/levels/level.gd" id="1_urvlt"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bhd33vu4qpbph" path="res://graphics/tilesets/water.png" id="3_xb4v1"]
 [ext_resource type="Texture2D" uid="uid://vrdy2gp08qay" path="res://graphics/tilesets/soil_water.png" id="5_d4w6o"]
 [ext_resource type="PackedScene" uid="uid://d2530w2lrixv4" path="res://scenes/objects/tree.tscn" id="7_mbbpy"]
+[ext_resource type="PackedScene" uid="uid://vem02mh7silc" path="res://scenes/objects/simple_object.tscn" id="8_ouxo3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4w6o"]
 texture = ExtResource("3_xb4v1")
@@ -851,5 +852,8 @@ position = Vector2(186, 342)
 
 [node name="Tree" parent="Objects" instance=ExtResource("7_mbbpy")]
 position = Vector2(116, 360)
+
+[node name="SimpleObject" parent="Objects" instance=ExtResource("8_ouxo3")]
+position = Vector2(214, 349)
 
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]

@@ -4,7 +4,7 @@ var direction: Vector2
 var last_direction: Vector2
 var speed := 50
 var can_move: bool = true
-var current_tool: Enum.Tool = Enum.Tool.AXE
+var current_tool: Enum.Tool = Enum.Tool.SWORD
 var current_seed: Enum.Seed
 
 @onready var move_state_machine = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
@@ -48,9 +48,11 @@ func get_basic_input():
 	if Input.is_action_just_pressed("tool_forward") or Input.is_action_just_pressed("tool_backward"):
 		var dir = Input.get_axis("tool_forward", "tool_backward")
 		current_tool = posmod(current_tool + int(dir), Enum.Tool.size()) as Enum.Tool
+		$ToolUI.reveal(true)
 
 	if Input.is_action_just_pressed("seed_forward"):
 		current_seed = posmod(current_seed + 1, Enum.Seed.size()) as Enum.Seed
+		$ToolUI.reveal(false)
 
 	if Input.is_action_just_pressed("action"):
 		tool_state_machine.travel(Data.TOOL_STATE_ANIMATIONS[current_tool])
