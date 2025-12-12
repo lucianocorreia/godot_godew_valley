@@ -15,7 +15,7 @@ var health: int = 3:
 
 
 func _ready() -> void:
-	create_apples(3)
+	create_apples(randi_range(0, 3))
 
 
 func hit(tool: Enum.Tool) -> void:
@@ -40,3 +40,11 @@ func get_apple() -> void:
 	if apples.size() > 0:
 		apples.pick_random().queue_free()
 		print("Apple collected!")
+
+
+func reset():
+	if health > 0:
+		for apple in $Apples.get_children():
+			apple.queue_free()
+		create_apples(randi_range(0, 3))
+		health = 3

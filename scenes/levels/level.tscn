@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=20 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Texture2D" uid="uid://b1cmu3aai85qc" path="res://graphics/tilesets/grass.png" id="1_bovvr"]
 [ext_resource type="Script" uid="uid://crdbsib38ohef" path="res://scenes/levels/level.gd" id="1_urvlt"]
@@ -8,6 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://vrdy2gp08qay" path="res://graphics/tilesets/soil_water.png" id="5_d4w6o"]
 [ext_resource type="PackedScene" uid="uid://d2530w2lrixv4" path="res://scenes/objects/tree.tscn" id="7_mbbpy"]
 [ext_resource type="PackedScene" uid="uid://vem02mh7silc" path="res://scenes/objects/simple_object.tscn" id="8_ouxo3"]
+[ext_resource type="Shader" uid="uid://b752sedpoqe4y" path="res://scenes/levels/circle_transition.gdshader" id="9_icy5c"]
+
+[sub_resource type="Gradient" id="Gradient_ouxo3"]
+offsets = PackedFloat32Array(0, 0.22648084, 0.456446, 1)
+colors = PackedColorArray(0.92941177, 0.8627451, 0.8156863, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.36862746, 0.46666667, 1, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4w6o"]
 texture = ExtResource("3_xb4v1")
@@ -823,8 +828,13 @@ texture = ExtResource("5_d4w6o")
 [sub_resource type="TileSet" id="TileSet_urvlt"]
 sources/0 = SubResource("TileSetAtlasSource_mbbpy")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmjfq"]
+shader = ExtResource("9_icy5c")
+shader_parameter/progress = 0.0
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_urvlt")
+daytime_color = SubResource("Gradient_ouxo3")
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -854,6 +864,70 @@ position = Vector2(186, 342)
 position = Vector2(116, 360)
 
 [node name="SimpleObject" parent="Objects" instance=ExtResource("8_ouxo3")]
-position = Vector2(214, 349)
+z_index = -1
+position = Vector2(207, 352)
+random = true
+
+[node name="SimpleObject2" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
+position = Vector2(192, 311)
+random = true
+
+[node name="SimpleObject3" parent="Objects" instance=ExtResource("8_ouxo3")]
+position = Vector2(229, 342)
+size = 3
+random = true
+
+[node name="SimpleObject4" parent="Objects" instance=ExtResource("8_ouxo3")]
+position = Vector2(150, 307)
+size = 3
+style = 0
+random = true
+
+[node name="SimpleObject5" parent="Objects" instance=ExtResource("8_ouxo3")]
+position = Vector2(151, 332)
+size = 3
+random = true
+
+[node name="SimpleObject6" parent="Objects" instance=ExtResource("8_ouxo3")]
+position = Vector2(221, 324)
+size = 3
+style = 0
+random = true
+
+[node name="SimpleObject7" parent="Objects" instance=ExtResource("8_ouxo3")]
+position = Vector2(213, 303)
+size = 3
+style = 0
+random = true
+
+[node name="SimpleObject8" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = -1
+position = Vector2(178, 295)
+style = 0
+random = true
+
+[node name="Overlay" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Overlay"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Overlay"]
+
+[node name="DayTransitionLayer" type="ColorRect" parent="Overlay/CanvasLayer"]
+material = SubResource("ShaderMaterial_rmjfq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.096204735, 0.09620475, 0.096204735, 1)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="DayTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+autostart = true
 
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]
