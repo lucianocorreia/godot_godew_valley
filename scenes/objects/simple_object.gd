@@ -20,7 +20,6 @@ func _ready() -> void:
 	if random:
 		size = randi_range(0, $Sprite2D.hframes - 1)
 		style = [0, 1].pick_random()
-	print("SimpleObject size:", size, "style:", style)
 	%Sprite2D.frame_coords = Vector2(size, style)
 	$CollisionShape2D.disabled = size < 2
 	z_index = -1 if size < 2 else 0

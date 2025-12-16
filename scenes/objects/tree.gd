@@ -15,6 +15,7 @@ var health: int = 3:
 
 
 func _ready() -> void:
+	$FlashSprite2D.frame = [0, 1].pick_random()
 	create_apples(randi_range(0, 3))
 
 
@@ -39,7 +40,6 @@ func get_apple() -> void:
 	var apples = $Apples.get_children()
 	if apples.size() > 0:
 		apples.pick_random().queue_free()
-		print("Apple collected!")
 
 
 func reset():

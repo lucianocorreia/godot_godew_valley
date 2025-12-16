@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=4 uid="uid://cqhykhx23v1su"]
+
+[ext_resource type="Script" uid="uid://c62jkv65meuxr" path="res://scenes/levels/house.gd" id="1_g6yoe"]
+[ext_resource type="TileSet" uid="uid://cw45kfg2c8mfk" path="res://premade/HouseTileSet.tres" id="1_mfwd8"]
+[ext_resource type="Texture2D" uid="uid://dpvg3yddudamn" path="res://graphics/tilesets/walls_floor_tile.png" id="2_bbbus"]
+[ext_resource type="Texture2D" uid="uid://cwbhys0nypuq" path="res://graphics/tilesets/roof.png" id="4_jfia5"]
+[ext_resource type="PackedScene" uid="uid://dxxa2cdh5ipd1" path="res://scenes/levels/tv.tscn" id="5_ap60n"]
+[ext_resource type="PackedScene" uid="uid://b8llmw8weehkr" path="res://scenes/levels/bed.tscn" id="6_4yql1"]
+[ext_resource type="Texture2D" uid="uid://c6gdvovhpj0oj" path="res://graphics/objects/plant.png" id="7_dc68u"]
+[ext_resource type="Texture2D" uid="uid://dvaxmp1m08kte" path="res://graphics/objects/carpet.png" id="8_e6eqm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jfia5"]
+texture = ExtResource("2_bbbus")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ap60n"]
+sources/0 = SubResource("TileSetAtlasSource_jfia5")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ap60n"]
+texture = ExtResource("4_jfia5")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_4yql1"]
+sources/0 = SubResource("TileSetAtlasSource_ap60n")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6eqm"]
+size = Vector2(6, 15)
+
+[node name="House" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_g6yoe")
+
+[node name="FloorLayer" type="TileMapLayer" parent="."]
+z_index = -2
+tile_set = SubResource("TileSet_ap60n")
+
+[node name="WallsLayer" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAADAAIAAAABAAIAAAADAAEAAAABAAEAAAADAAAAAAABAAEAAAADAP//AAABAAEAAAADAP7/AAABAAEAAAADAP3/AAABAAAAAAACAAIAAAABAAIAAAACAAEAAAABAAEAAAACAAAAAAABAAEAAAACAP//AAABAAEAAAACAP7/AAABAAEAAAACAP3/AAABAAAAAAABAAIAAAABAAIAAAABAAEAAAABAAEAAAABAAAAAAABAAEAAAABAP//AAABAAEAAAABAP7/AAABAAEAAAABAP3/AAABAAAAAAAAAAIAAAABAAIAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAEAAAAAAP3/AAABAAAAAAD//wIAAAABAAIAAAD//wEAAAABAAEAAAD//wAAAAABAAEAAAD/////AAABAAEAAAD///7/AAABAAEAAAD///3/AAABAAAAAAD+/wIAAAABAAIAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAEAAAD+//3/AAABAAAAAAD9/wIAAAABAAIAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAEAAAD9//3/AAABAAAAAAD8/wIAAAAAAAIAAAD8/wEAAAAAAAEAAAD8/wAAAAAAAAEAAAD8////AAAAAAEAAAD8//7/AAAAAAEAAAD8//3/AAAAAAAAAAAEAAIAAAAAAAQAAAAFAP3/AAACAAAAAAAEAP3/AAABAAAAAAAFAAIAAAACAAIAAAAFAAEAAAACAAEAAAAFAAAAAAACAAEAAAAFAP//AAACAAEAAAAFAP7/AAACAAEAAAAEAAEAAAABAAEAAAAEAAAAAAABAAEAAAAEAP//AAABAAEAAAAEAP7/AAABAAEAAAA=")
+tile_set = ExtResource("1_mfwd8")
+
+[node name="RoofLayer" type="TileMapLayer" parent="."]
+visible = false
+tile_map_data = PackedByteArray("AAD8/wIAAAAAAAUAAAAFAAIAAAACAAUAAAD9/wIAAAABAAUAAAD+/wIAAAABAAUAAAD//wIAAAABAAUAAAAAAAIAAAABAAUAAAABAAIAAAABAAUAAAACAAIAAAABAAUAAAADAAIAAAABAAUAAAAEAAIAAAABAAUAAAD8/wEAAAAAAAQAAAD8/wAAAAAAAAQAAAAFAAEAAAACAAQAAAAFAAAAAAACAAQAAAD9/wEAAAABAAQAAAD+/wEAAAABAAQAAAD//wEAAAABAAQAAAAAAAEAAAABAAQAAAABAAEAAAABAAQAAAACAAEAAAABAAQAAAADAAEAAAABAAQAAAAEAAEAAAABAAQAAAD9/wAAAAABAAQAAAD+/wAAAAABAAQAAAD//wAAAAABAAQAAAAAAAAAAAABAAQAAAABAAAAAAABAAQAAAACAAAAAAABAAQAAAADAAAAAAABAAQAAAAEAAAAAAABAAQAAAD9//7/AAABAAIAAAD+//7/AAABAAIAAAD///7/AAABAAIAAAAAAP7/AAABAAIAAAABAP7/AAABAAIAAAACAP7/AAABAAIAAAADAP7/AAABAAIAAAAEAP7/AAABAAIAAAAFAP7/AAACAAIAAAD8//7/AAAAAAIAAAD8//3/AAAAAAEAAAAFAP3/AAACAAEAAAD9//3/AAABAAEAAAD+//3/AAABAAEAAAD///3/AAABAAEAAAAAAP3/AAABAAEAAAABAP3/AAABAAEAAAACAP3/AAABAAEAAAADAP3/AAABAAEAAAAEAP3/AAABAAEAAAD8//z/AAAAAAAAAAAFAPz/AAACAAAAAAD9//z/AAABAAAAAAD+//z/AAABAAAAAAD///z/AAABAAAAAAAAAPz/AAABAAAAAAABAPz/AAABAAAAAAACAPz/AAABAAAAAAADAPz/AAABAAAAAAAEAPz/AAABAAAAAAD8////AAAAAAMAAAAFAP//AAACAAMAAAD9////AAABAAMAAAD+////AAABAAMAAAD/////AAABAAMAAAAAAP//AAABAAMAAAABAP//AAABAAMAAAACAP//AAABAAMAAAADAP//AAABAAMAAAAEAP//AAABAAMAAAA=")
+tile_set = SubResource("TileSet_4yql1")
+
+[node name="HouseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HouseArea"]
+visible = false
+polygon = PackedVector2Array(-60, -44, 93, -44, 94, 42, 80, 42, 80, 51, 64, 51, 64, 42, -60, 42)
+
+[node name="TV" parent="." instance=ExtResource("5_ap60n")]
+position = Vector2(-32, -30)
+
+[node name="Bed" parent="." instance=ExtResource("6_4yql1")]
+position = Vector2(70, -31)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-52, -34)
+metadata/_edit_group_ = true
+
+[node name="Plant" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("7_dc68u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_e6eqm")
+
+[node name="Carpet" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-31, -3)
+texture = ExtResource("8_e6eqm")
+
+[connection signal="body_entered" from="HouseArea" to="." method="_on_house_area_body_entered"]
+[connection signal="body_exited" from="HouseArea" to="." method="_on_house_area_body_exited"]

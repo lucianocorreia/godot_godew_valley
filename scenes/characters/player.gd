@@ -11,6 +11,8 @@ var current_seed: Enum.Seed
 @onready var tool_state_machine = $Animation/AnimationTree.get("parameters/ToolStateMachine/playback")
 
 signal tool_use(tool: Enum.Tool, pos: Vector2)
+signal diagnose
+signal day_change
 
 
 func _physics_process(_delta: float) -> void:
@@ -21,6 +23,10 @@ func _physics_process(_delta: float) -> void:
 
 	if direction:
 		last_direction = direction
+
+	var ray_y = int(last_direction.y if not last_direction.x else 0.0)
+
+	$RayCast2D.target_position = Vector2(last_direction.x, ray_y).normalized() * 20  ## 20 = distance on raycast
 
 
 func move():
@@ -55,10 +61,19 @@ func get_basic_input():
 		$ToolUI.reveal(false)
 
 	if Input.is_action_just_pressed("action"):
-		tool_state_machine.travel(Data.TOOL_STATE_ANIMATIONS[current_tool])
-		$Animation/AnimationTree.set("parameters/ToolOneShow/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		$RayCast2D.force_raycast_update()
+		print("RayCast2D collider: ", $RayCast2D.get_collider())
+		if not $RayCast2D.get_collider():
+			tool_state_machine.travel(Data.TOOL_STATE_ANIMATIONS[current_tool])
+			$Animation/AnimationTree.set("parameters/ToolOneShow/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		else:
+			$RayCast2D.get_collider().interact(self)
+
+	if Input.is_action_just_pressed("diagnose"):
+		diagnose.emit()
 
 
+# Emit tool use signal with current tool and position
 func tool_use_emit():
 	tool_use.emit(current_tool, position + last_direction * 16 + Vector2(0, 4))
 
@@ -69,3 +84,7 @@ func _on_animation_tree_animation_started(_anim_name: StringName) -> void:
 
 func _on_animation_tree_animation_finished(_anim_name: StringName) -> void:
 	can_move = true
+
+
+func day_change_emit():
+	day_change.emit()

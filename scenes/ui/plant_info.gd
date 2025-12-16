@@ -1,0 +1,24 @@
+extends PanelContainer
+
+var res: PlantResource
+
+
+func setup(new_res: PlantResource):
+	res = new_res
+	$HBoxContainer/VBoxContainer/NameLabel.text = res.name
+	$HBoxContainer/IconTexture.texture = res.icon_texture
+
+	#progress bar
+	$HBoxContainer/VBoxContainer/GrowBar.max_value = res.h_frames
+	$HBoxContainer/VBoxContainer/DeathBar.max_value = res.death_max
+	update()
+	res.connect("changed", death_checker)
+
+
+func update():
+	$HBoxContainer/VBoxContainer/GrowBar.value = res.age
+	$HBoxContainer/VBoxContainer/DeathBar.value = res.death_count
+
+
+func death_checker():
+	queue_free()
