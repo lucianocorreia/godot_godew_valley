@@ -2,6 +2,8 @@ extends Node2D
 
 var plant_scene = preload("uid://boqy2w11hcfuy")
 var plant_info_scene = preload("uid://2df4pd5knx20")
+var projectile_scene = preload("uid://gbpjkq6ikogm")
+
 var used_cells: Array[Vector2i] = []
 var raining: bool:
 	set(value):
@@ -18,6 +20,7 @@ var raining: bool:
 
 func _ready() -> void:
 	Data.forecast_rain = [true, false].pick_random()
+	$Objects/ScareCrow.connect("shoot_projectile", Callable(self, "create_projectile"))
 
 
 func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
@@ -40,7 +43,7 @@ func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 
 		Enum.Tool.FISH:
 			if not grid_coord in $Layers/GrassLayer.get_used_cells():
-				print("fishing at ", grid_coord)
+				$Objects/Player.start_fishing(pos)
 
 		Enum.Tool.SEED:
 			if has_soil and not grid_coord in used_cells:
@@ -105,3 +108,9 @@ func level_reset() -> void:
 
 func plant_death(coord: Vector2i) -> void:
 	used_cells.erase(coord)
+
+
+func create_projectile(start_pos: Vector2, direction: Vector2) -> void:
+	var projectile = projectile_scene.instantiate()
+	projectile.setup(start_pos, direction)
+	$Objects.add_child(projectile)

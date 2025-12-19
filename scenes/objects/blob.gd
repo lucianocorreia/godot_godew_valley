@@ -19,17 +19,18 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func push() -> void:
+func push(dir = Vector2.ZERO) -> void:
 	var tween = get_tree().create_tween()
-	var target = (plauer.position - position).normalized() * -1 * push_distance
+	var target_direction = dir if dir else (plauer.position - position).normalized()
+	var target = target_direction * -1 * push_distance
 	tween.tween_property(self, "push_direction", target, 0.1)
 	tween.tween_property(self, "push_direction", Vector2.ZERO, 0.2)
 
 
-func hit(tool: Enum.Tool) -> void:
+func hit(tool: Enum.Tool, dir = Vector2.ZERO) -> void:
 	if tool == Enum.Tool.SWORD:
 		$FlashSprite2D.flash()
-		push()
+		push(dir)
 		health -= 1
 
 
