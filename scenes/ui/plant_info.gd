@@ -12,13 +12,11 @@ func setup(new_res: PlantResource):
 	$HBoxContainer/VBoxContainer/GrowBar.max_value = res.h_frames
 	$HBoxContainer/VBoxContainer/DeathBar.max_value = res.death_max
 	update()
-	res.connect("changed", death_checker)
+	res.connect("changed", update)
 
 
 func update():
 	$HBoxContainer/VBoxContainer/GrowBar.value = res.age
 	$HBoxContainer/VBoxContainer/DeathBar.value = res.death_count
-
-
-func death_checker():
-	queue_free()
+	if res.death_count >= res.death_max:
+		queue_free()

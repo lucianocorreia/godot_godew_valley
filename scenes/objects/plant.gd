@@ -12,6 +12,7 @@ func setup(grid_coord: Vector2i, parent: Node2D, new_res: PlantResource, plant_d
 	res = new_res
 	$Sprite2D.texture = res.texture
 	death.connect(plant_death_func)
+	res.connect("changed", update)
 
 
 func grow(watered: bool) -> void:
@@ -26,3 +27,12 @@ func _on_collision_area_body_entered(_body: Node2D) -> void:
 		$Sprite2D.flash(0.2, 0.2, queue_free)
 		death.emit(coord)
 		res.dead = true
+
+
+func damage() -> void:
+	res.damage()
+
+
+func update() -> void:
+	if res.death_count >= res.death_max:
+		queue_free()

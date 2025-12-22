@@ -9,19 +9,34 @@ var health: int = 3:
 		health = value
 		if health <= 0:
 			death()
+var plant_target: StaticBody2D
+var active: bool = true
 
-@onready var plauer = get_tree().get_first_node_in_group("Player")
+@onready var player = get_tree().get_first_node_in_group("Player")
+
+
+func setup(start_pos, target, parent) -> void:
+	position = start_pos
+	parent.add_child(self)
+	plant_target = target
 
 
 func _physics_process(_delta: float) -> void:
-	direction = (plauer.position - position).normalized()
-	velocity = direction * speed + push_direction
-	move_and_slide()
+	if plant_target:
+		direction = (plant_target.position - position).normalized()
+		velocity = direction * speed + push_direction
+		move_and_slide()
+		if position.distance_to(plant_target.position) < 10 and active:
+			plant_target.damage()
+			active = false
+			death()
+	else:
+		death()
 
 
 func push(dir = Vector2.ZERO) -> void:
 	var tween = get_tree().create_tween()
-	var target_direction = dir if dir else (plauer.position - position).normalized()
+	var target_direction = dir if dir else (player.position - position).normalized()
 	var target = target_direction * -1 * push_distance
 	tween.tween_property(self, "push_direction", target, 0.1)
 	tween.tween_property(self, "push_direction", Vector2.ZERO, 0.2)

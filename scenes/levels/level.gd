@@ -3,6 +3,19 @@ extends Node2D
 var plant_scene = preload("uid://boqy2w11hcfuy")
 var plant_info_scene = preload("uid://2df4pd5knx20")
 var projectile_scene = preload("uid://gbpjkq6ikogm")
+var blob_scene = preload("uid://c1ngrhhxby0j6")
+var macchine_scenes = {
+	Enum.Machine.SPRINKLER: preload("uid://jagwlsp7f7ck"),
+	Enum.Machine.SCARECROW: preload("uid://duu6unox66m8d"),
+	Enum.Machine.FISHER: preload("uid://drbptkvju1amb"),
+}
+
+const MACHINE_PREVIEW_TEXTURES = {
+	Enum.Machine.SPRINKLER: {"texture": preload("res://graphics/icons/sprinkler.png"), "offset": Vector2i(0, 0)},
+	Enum.Machine.FISHER: {"texture": preload("res://graphics/icons/fisher.png"), "offset": Vector2i(0, -4)},
+	Enum.Machine.SCARECROW: {"texture": preload("res://graphics/icons/scarecrow.png"), "offset": Vector2i(0, -4)},
+	Enum.Machine.DELETE: {"texture": preload("res://graphics/icons/delete.png"), "offset": Vector2i(0, 0)}
+}
 
 var used_cells: Array[Vector2i] = []
 var raining: bool:
@@ -13,6 +26,7 @@ var raining: bool:
 
 @onready var player = $Objects/Player
 @onready var day_transition_material = $Overlay/CanvasLayer/DayTransitionLayer.material
+@onready var machine_preview = $Overlay/MachinePreviewSprite
 
 @export var daytime_color: Gradient
 @export var rain_color: Color
@@ -77,6 +91,10 @@ func _process(_delta: float) -> void:
 	var color = daytime_color.sample(daytime_point).lerp(rain_color, 0.5 if raining else 0.0)
 	$Overlay/CanvasModulate.color = color
 
+	# machine preview
+	machine_preview.visible = player.current_state == Enum.State.BUILDING
+	machine_preview.position = player.get_machine_coord() + (MACHINE_PREVIEW_TEXTURES[player.current_machine]["offset"] as Vector2)
+
 
 func day_restart() -> void:
 	var tween = create_tween()
@@ -114,3 +132,32 @@ func create_projectile(start_pos: Vector2, direction: Vector2) -> void:
 	var projectile = projectile_scene.instantiate()
 	projectile.setup(start_pos, direction)
 	$Objects.add_child(projectile)
+
+
+func _on_player_build(current_machine: int) -> void:
+	if current_machine != Enum.Machine.DELETE:
+		var machine = macchine_scenes[current_machine].instantiate()
+		machine.setup(player.get_machine_coord(), self, $Objects)
+	else:
+		for machine in get_tree().get_nodes_in_group("Machines"):
+			machine.delete(player.get_machine_coord() / 16)
+
+
+func _on_player_machine_change(machine: int) -> void:
+	$Overlay/MachinePreviewSprite.texture = MACHINE_PREVIEW_TEXTURES[machine]["texture"]
+
+
+func water_planrs(coord: Vector2i) -> void:
+	const SOIL_DIRECTIONS = [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
+	for dir in SOIL_DIRECTIONS:
+		var cell = coord + dir
+		if cell in $Layers/SoilLayer.get_used_cells():
+			$Layers/SoilWaterLayer.set_cell(cell, 0, Vector2i(randi_range(0, 2), 0))
+
+
+func _on_blob_timer_timeout() -> void:
+	var plants = get_tree().get_nodes_in_group("Plants")
+	if plants:
+		var blob = blob_scene.instantiate()
+		var pos = $BlobSpawnPositions.get_children().pick_random().position
+		blob.setup(pos, plants.pick_random(), $Objects)

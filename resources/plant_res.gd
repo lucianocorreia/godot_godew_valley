@@ -9,7 +9,10 @@ class_name PlantResource
 @export var icon_texture: Texture2D
 
 var age: float
-var death_count: int
+var death_count: int:
+	set(value):
+		death_count = value
+		emit_changed()
 var dead: bool:
 	set(value):
 		dead = value
@@ -40,3 +43,7 @@ func decay(plant: StaticBody2D) -> void:
 
 func get_complete() -> bool:
 	return age >= h_frames - 1
+
+
+func damage() -> void:
+	death_count += 1
