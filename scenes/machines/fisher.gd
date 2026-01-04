@@ -31,6 +31,7 @@ func _process(_delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	start_fishing()
+	Data.change_item(Enum.Item.FISH)
 
 
 func start_fishing() -> void:

@@ -17,15 +17,17 @@ var dead: bool:
 	set(value):
 		dead = value
 		emit_changed()
+var reward: Enum.Item
 
 
-func setup(seed_enum: Enum.Seed) -> void:
+func setup(seed_enum: Enum.Seed, reward_item: Enum.Item) -> void:
 	texture = load(Data.PLANT_DATA[seed_enum]["texture"])
 	grow_speed = Data.PLANT_DATA[seed_enum]["grow_speed"]
 	h_frames = Data.PLANT_DATA[seed_enum]["h_frames"]
 	death_max = Data.PLANT_DATA[seed_enum]["death_max"]
 	name = Data.PLANT_DATA[seed_enum]["name"]
 	icon_texture = load(Data.PLANT_DATA[seed_enum]["icon_texture"])
+	reward = reward_item
 
 
 func grow(sprite: Sprite2D) -> void:

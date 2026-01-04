@@ -52,12 +52,14 @@ const PLANT_DATA = {
 	}
 }
 const MACHINE_UPGRADE_COST = {
+	Enum.Machine.DELETE: {},
 	Enum.Machine.SPRINKLER: {"name": "Sprinkler", "cost": {Enum.Item.TOMATO: 30, Enum.Item.WHEAT: 20}, "icon": preload("res://graphics/icons/sprinkler.png")},
-	Enum.Machine.FISHER: {"name": "Sprinkler", "cost": {Enum.Item.WOOD: 25, Enum.Item.FISH: 15}, "icon": preload("res://graphics/icons/fisher.png")},
-	Enum.Machine.SCARECROW: {"name": "Sprinkler", "cost": {Enum.Item.PUMPKIN: 15, Enum.Item.CORN: 15}, "icon": preload("res://graphics/icons/scarecrow.png")}
+	Enum.Machine.FISHER: {"name": "Fisher", "cost": {Enum.Item.WOOD: 25, Enum.Item.FISH: 15}, "icon": preload("res://graphics/icons/fisher.png")},
+	Enum.Machine.SCARECROW: {"name": "Scarecrow", "cost": {Enum.Item.PUMPKIN: 15, Enum.Item.CORN: 15}, "icon": preload("res://graphics/icons/scarecrow.png")}
 }
 const HOUSE_COST = {1: {Enum.Item.WOOD: 30, Enum.Item.APPLE: 20}, 2: {Enum.Item.WOOD: 40, Enum.Item.APPLE: 30}}
 const STYLE_UPGRADES = {
+	Enum.Style.BASIC: {},
 	Enum.Style.COWBOY: {"name": "Cowboy", "cost": {Enum.Item.WOOD: 8, Enum.Item.WHEAT: 6}, "icon": preload("res://graphics/icons/cowboy.png")},
 	Enum.Style.ENGLISH: {"name": "Oldie", "cost": {Enum.Item.WOOD: 8, Enum.Item.WHEAT: 6}, "icon": preload("res://graphics/icons/english.png")},
 	Enum.Style.BASEBALL: {"name": "Baseball", "cost": {Enum.Item.WOOD: 8, Enum.Item.WHEAT: 6}, "icon": preload("res://graphics/icons/blue.png")},
@@ -74,3 +76,16 @@ const TOOL_STATE_ANIMATIONS = {
 }
 
 var forecast_rain: bool
+var unlocked_styles: Array = [Enum.Style.BASIC]
+var unlocked_machines: Array = [Enum.Machine.DELETE]
+var shop_connection = {
+	Enum.Shop.HAT: {"tracker": unlocked_styles, "all": STYLE_UPGRADES.keys()},
+	Enum.Shop.MAIN: {"tracker": unlocked_machines, "all": MACHINE_UPGRADE_COST.keys()},
+}
+
+var items = {Enum.Item.WOOD: 1, Enum.Item.APPLE: 3, Enum.Item.FISH: 4, Enum.Item.CORN: 0, Enum.Item.WHEAT: 0, Enum.Item.PUMPKIN: 0, Enum.Item.TOMATO: 0}
+
+
+func change_item(item: Enum.Item, amount: int = 1) -> void:
+	items[item] += amount
+	get_tree().get_eirst_node_in_group("ResourceUI").reveal()

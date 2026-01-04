@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj0b5gapbidjy"]
+
+[ext_resource type="Script" uid="uid://b0eqslr3ou6ka" path="res://scenes/characters/character.gd" id="1_1bdar"]
+[ext_resource type="Texture2D" uid="uid://cjtrp4pxnekxi" path="res://graphics/characters/mouse.png" id="1_x31xa"]
+[ext_resource type="PackedScene" uid="uid://chk2wl60eo0og" path="res://scenes/ui/dialog.tscn" id="3_e22cc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bdar"]
+size = Vector2(10, 12)
+
+[node name="Character" type="CharacterBody2D" groups=["Characters"]]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource("1_1bdar")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_x31xa")
+hframes = 4
+vframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_1bdar")
+
+[node name="Dialog" parent="." instance=ExtResource("3_e22cc")]
+visible = false

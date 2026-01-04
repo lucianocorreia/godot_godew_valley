@@ -8,7 +8,9 @@ var current_tool: Enum.Tool = Enum.Tool.SWORD
 var current_seed: Enum.Seed
 var current_state: Enum.State
 var current_style: Enum.Style
+var current_style_index: int
 var current_machine: Enum.Machine
+var current_machine_index: int
 
 @onready var move_state_machine = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var tool_state_machine = $Animation/AnimationTree.get("parameters/ToolStateMachine/playback")
@@ -18,6 +20,7 @@ signal diagnose
 signal day_change
 signal build(machine: Enum.Machine)
 signal machine_change(machine: Enum.Machine)
+signal close_shop
 
 
 func _physics_process(_delta: float) -> void:
@@ -35,6 +38,8 @@ func _physics_process(_delta: float) -> void:
 			get_building_input()
 			move()
 			animate()
+		Enum.State.SHOP:
+			get_shop_input()
 
 	if direction:
 		last_direction = direction
@@ -88,11 +93,13 @@ func get_basic_input():
 		diagnose.emit()
 
 	if Input.is_action_just_pressed("style_toggle"):
-		current_style = posmod(current_style + 1, Enum.Style.size()) as Enum.Style
+		current_style_index = posmod(current_style_index + 1, Data.unlocked_styles.size())
+		current_style = Data.unlocked_styles[current_style_index] as Enum.Style
 		$Sprite2D.texture = Data.PLAYER_SKINS[current_style]
 
 	if Input.is_action_just_pressed("build"):
 		current_state = Enum.State.BUILDING
+		current_machine = Data.unlocked_machines[current_machine_index] as Enum.Machine
 
 
 func get_fishing_input() -> void:
@@ -106,11 +113,17 @@ func get_building_input() -> void:
 
 	if Input.is_action_just_pressed("tool_forward") or Input.is_action_just_pressed("tool_backward"):
 		var dir = Input.get_axis("tool_forward", "tool_backward")
-		current_machine = posmod(current_machine + int(dir), Enum.Machine.size()) as Enum.Machine
+		current_machine_index = posmod(current_machine_index + int(dir), Data.unlocked_machines.size())
+		current_machine = Data.unlocked_machines[current_machine_index] as Enum.Machine
 		machine_change.emit(current_machine)
 
 	if Input.is_action_just_pressed("action"):
 		build.emit(current_machine)
+
+
+func get_shop_input() -> void:
+	if Input.is_action_just_pressed("ui_cancel"):
+		close_shop.emit()
 
 
 func start_fishing(_fish_pos: Vector2) -> void:

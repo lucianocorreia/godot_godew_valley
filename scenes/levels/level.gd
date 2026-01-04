@@ -34,7 +34,8 @@ var raining: bool:
 
 func _ready() -> void:
 	Data.forecast_rain = [true, false].pick_random()
-	$Objects/ScareCrow.connect("shoot_projectile", Callable(self, "create_projectile"))
+	for character in get_tree().get_nodes_in_group("Characters"):
+		character.connect("open_shop", open_shop)
 
 
 func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
@@ -61,16 +62,25 @@ func _on_player_tool_use(tool: Enum.Tool, pos: Vector2) -> void:
 
 		Enum.Tool.SEED:
 			if has_soil and not grid_coord in used_cells:
-				var plant_res = PlantResource.new()
-				plant_res.setup($Objects/Player.current_seed)
+				var selected_item = {
+					Enum.Seed.TOMATO: Enum.Item.TOMATO,
+					Enum.Seed.WHEAT: Enum.Item.WHEAT,
+					Enum.Seed.CORN: Enum.Item.CORN,
+					Enum.Seed.PUMPKIN: Enum.Item.PUMPKIN,
+				}[player.current_seed]
 
-				var plant = plant_scene.instantiate()
-				plant.setup(grid_coord, $Objects, plant_res, plant_death)
-				used_cells.append(grid_coord)
+				if Data.items[selected_item] > 0:
+					Data.change_item(selected_item, -1)
+					var plant_res = PlantResource.new()
+					plant_res.setup($Objects/Player.current_seed, selected_item)
 
-				var plant_info = plant_info_scene.instantiate()
-				plant_info.setup(plant_res)
-				$Overlay/CanvasLayer/PlantInfoContainer.add(plant_info)
+					var plant = plant_scene.instantiate()
+					plant.setup(grid_coord, $Objects, plant_res, plant_death)
+					used_cells.append(grid_coord)
+
+					var plant_info = plant_info_scene.instantiate()
+					plant_info.setup(plant_res)
+					$Overlay/CanvasLayer/PlantInfoContainer.add(plant_info)
 
 		Enum.Tool.AXE, Enum.Tool.SWORD:
 			for object in get_tree().get_nodes_in_group("Objects"):
@@ -134,6 +144,11 @@ func create_projectile(start_pos: Vector2, direction: Vector2) -> void:
 	$Objects.add_child(projectile)
 
 
+func open_shop(shop_type: Enum.Shop) -> void:
+	$Overlay/CanvasLayer/ShopUI.reveal(shop_type)
+	player.current_state = Enum.State.SHOP
+
+
 func _on_player_build(current_machine: int) -> void:
 	if current_machine != Enum.Machine.DELETE:
 		var machine = macchine_scenes[current_machine].instantiate()
@@ -161,3 +176,12 @@ func _on_blob_timer_timeout() -> void:
 		var blob = blob_scene.instantiate()
 		var pos = $BlobSpawnPositions.get_children().pick_random().position
 		blob.setup(pos, plants.pick_random(), $Objects)
+
+
+func _on_player_close_shop() -> void:
+	$Overlay/CanvasLayer/ShopUI.hide()
+	player.current_state = Enum.State.DEFAULT
+
+
+func _on_shop_ui_close() -> void:
+	_on_player_close_shop()

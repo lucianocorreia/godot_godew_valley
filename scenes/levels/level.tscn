@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=34 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Texture2D" uid="uid://b1cmu3aai85qc" path="res://graphics/tilesets/grass.png" id="1_bovvr"]
 [ext_resource type="Script" uid="uid://crdbsib38ohef" path="res://scenes/levels/level.gd" id="1_urvlt"]
@@ -12,9 +12,13 @@
 [ext_resource type="Shader" uid="uid://b752sedpoqe4y" path="res://scenes/levels/circle_transition.gdshader" id="9_icy5c"]
 [ext_resource type="PackedScene" uid="uid://cqhykhx23v1su" path="res://scenes/levels/house.tscn" id="10_qogh7"]
 [ext_resource type="PackedScene" uid="uid://gxfhn8vu2d0l" path="res://scenes/ui/plant_info_container.tscn" id="10_rmjfq"]
+[ext_resource type="PackedScene" uid="uid://bj0b5gapbidjy" path="res://scenes/characters/character.tscn" id="11_mq31s"]
+[ext_resource type="Texture2D" uid="uid://cjtrp4pxnekxi" path="res://graphics/characters/mouse.png" id="12_5mi6g"]
 [ext_resource type="Texture2D" uid="uid://da1u0rhfjt8a3" path="res://graphics/weather/drops.png" id="12_xfk5q"]
-[ext_resource type="PackedScene" uid="uid://duu6unox66m8d" path="res://scenes/machines/scare_crow.tscn" id="13_5mi6g"]
-[ext_resource type="Texture2D" uid="uid://capn581vt8q7g" path="res://graphics/icons/sprinkler.png" id="18_qhnmj"]
+[ext_resource type="Texture2D" uid="uid://cn4s3loq3j21r" path="res://graphics/characters/cat.png" id="13_b8j7q"]
+[ext_resource type="PackedScene" uid="uid://c423xo3vr8gm7" path="res://scenes/ui/shop_ui.tscn" id="16_qhnmj"]
+[ext_resource type="PackedScene" uid="uid://bjuiwygspkh17" path="res://scenes/ui/resource_ui.tscn" id="17_jyre1"]
+[ext_resource type="Texture2D" uid="uid://fnmyohadow27" path="res://graphics/icons/delete.png" id="18_qhnmj"]
 
 [sub_resource type="Gradient" id="Gradient_ouxo3"]
 offsets = PackedFloat32Array(0, 0.22648084, 0.456446, 1)
@@ -1050,132 +1054,136 @@ position = Vector2(231, 160)
 position = Vector2(197, 174)
 
 [node name="SimpleObject" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(441, 259)
-size = 1
+size = 2
+style = 0
 random = true
 
 [node name="SimpleObject9" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(238, 457)
-size = 1
 random = true
 
 [node name="SimpleObject10" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(254, 440)
-size = 1
+size = 2
 style = 0
 random = true
 
 [node name="SimpleObject11" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(269, 466)
+size = 3
 random = true
 
 [node name="SimpleObject12" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(281, 425)
 size = 2
-style = 0
 random = true
 
 [node name="SimpleObject13" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(216, 421)
-size = 2
+size = 1
 style = 0
 random = true
 
 [node name="SimpleObject14" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(93, 476)
-size = 1
+size = 2
 random = true
 
 [node name="SimpleObject15" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(82, 447)
-size = 3
+size = 1
 random = true
 
 [node name="SimpleObject16" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(70, 506)
-size = 1
-style = 0
+size = 2
 random = true
 
 [node name="SimpleObject17" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(71, 484)
-size = 1
-style = 0
+size = 3
 random = true
 
 [node name="SimpleObject18" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(-42, 479)
-size = 2
+size = 1
 random = true
 
 [node name="SimpleObject19" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(-63, 484)
 size = 2
-random = true
-
-[node name="SimpleObject20" parent="Objects" instance=ExtResource("8_ouxo3")]
-position = Vector2(-66, 491)
-size = 1
 style = 0
 random = true
 
+[node name="SimpleObject20" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
+position = Vector2(-66, 491)
+size = 3
+random = true
+
 [node name="SimpleObject21" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(-93, 494)
+size = 3
 random = true
 
 [node name="SimpleObject22" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(-86, 454)
-size = 2
-style = 0
+size = 3
 random = true
 
 [node name="SimpleObject23" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(-76, 444)
-size = 3
+size = 2
 random = true
 
 [node name="SimpleObject24" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(-145, 337)
 size = 3
+style = 0
 random = true
 
 [node name="SimpleObject25" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(-127, 324)
-size = 3
+size = 2
 style = 0
 random = true
 
 [node name="SimpleObject26" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(-92, 303)
+size = 1
+style = 0
 random = true
 
 [node name="SimpleObject27" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(-34, 227)
-size = 2
-style = 0
+size = 3
 random = true
 
 [node name="SimpleObject28" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(-19, 195)
-size = 2
 style = 0
 random = true
 
 [node name="SimpleObject29" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(-9, 225)
-size = 3
+size = 2
+style = 0
 random = true
 
 [node name="SimpleObject30" parent="Objects" instance=ExtResource("8_ouxo3")]
@@ -1185,114 +1193,124 @@ size = 3
 random = true
 
 [node name="SimpleObject31" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(269, 178)
-size = 2
+size = 1
 random = true
 
 [node name="SimpleObject32" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(163, 193)
-size = 1
+size = 2
+style = 0
 random = true
 
 [node name="SimpleObject33" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(106, 179)
-size = 1
+size = 3
+style = 0
 random = true
 
 [node name="SimpleObject34" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(150, 179)
-size = 1
+size = 3
 style = 0
 random = true
 
 [node name="SimpleObject35" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(436, 236)
-size = 3
+size = 2
 random = true
 
 [node name="SimpleObject36" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(444, 280)
-size = 3
+size = 1
 style = 0
 random = true
 
 [node name="SimpleObject37" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(390, 227)
+style = 0
 random = true
 
 [node name="SimpleObject38" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(364, 250)
 size = 1
-random = true
-
-[node name="SimpleObject39" parent="Objects" instance=ExtResource("8_ouxo3")]
-position = Vector2(399, 260)
-size = 1
 style = 0
 random = true
 
+[node name="SimpleObject39" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
+position = Vector2(399, 260)
+size = 2
+random = true
+
 [node name="SimpleObject40" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(366, 294)
-size = 1
+size = 3
 random = true
 
 [node name="SimpleObject41" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(347, 394)
-size = 3
+size = 2
 style = 0
 random = true
 
 [node name="SimpleObject2" parent="Objects" instance=ExtResource("8_ouxo3")]
 position = Vector2(-6, 260)
-style = 0
 random = true
 
 [node name="SimpleObject3" parent="Objects" instance=ExtResource("8_ouxo3")]
+z_index = 0
 position = Vector2(344, 438)
-style = 0
+size = 2
 random = true
 
 [node name="SimpleObject4" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(97, 307)
-size = 2
+size = 1
+style = 0
 random = true
 
 [node name="SimpleObject5" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(62, 319)
-size = 2
+style = 0
 random = true
 
 [node name="SimpleObject6" parent="Objects" instance=ExtResource("8_ouxo3")]
 z_index = 0
 position = Vector2(-29, 288)
-size = 3
+size = 2
 style = 0
 random = true
 
 [node name="SimpleObject7" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(30, 267)
-size = 2
+size = 1
+style = 0
 random = true
 
 [node name="SimpleObject8" parent="Objects" instance=ExtResource("8_ouxo3")]
-z_index = 0
 position = Vector2(61, 289)
-size = 2
 random = true
 
 [node name="House" parent="Objects" instance=ExtResource("10_qogh7")]
 position = Vector2(191, 279)
 
-[node name="ScareCrow" parent="Objects" instance=ExtResource("13_5mi6g")]
-position = Vector2(354, 341)
-max_range = 150.0
+[node name="Character" parent="Objects" instance=ExtResource("11_mq31s")]
+position = Vector2(135, 405)
+dialog = Array[String](["I am the hat mouse!", "State yout business"])
+texture = ExtResource("12_5mi6g")
+shop_tupe = 1
+
+[node name="Character2" parent="Objects" instance=ExtResource("11_mq31s")]
+position = Vector2(296, 349)
+dialog = Array[String](["I sell machines", "Whats would you like?"])
+texture = ExtResource("13_b8j7q")
 
 [node name="Overlay" type="Node2D" parent="."]
 
@@ -1314,6 +1332,11 @@ offset_left = 56.0
 offset_top = 31.0
 offset_right = 56.0
 offset_bottom = 31.0
+
+[node name="ShopUI" parent="Overlay/CanvasLayer" instance=ExtResource("16_qhnmj")]
+visible = false
+
+[node name="ResourceUI" parent="Overlay/CanvasLayer" instance=ExtResource("17_jyre1")]
 
 [node name="RainDropsParticles" type="GPUParticles2D" parent="Overlay"]
 material = SubResource("CanvasItemMaterial_xfk5q")
@@ -1384,8 +1407,10 @@ position = Vector2(4, 185)
 position = Vector2(177, 183)
 
 [connection signal="build" from="Objects/Player" to="." method="_on_player_build"]
+[connection signal="close_shop" from="Objects/Player" to="." method="_on_player_close_shop"]
 [connection signal="day_change" from="Objects/Player" to="." method="_on_player_day_change"]
 [connection signal="diagnose" from="Objects/Player" to="." method="_on_player_diagnose"]
 [connection signal="machine_change" from="Objects/Player" to="." method="_on_player_machine_change"]
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]
+[connection signal="close" from="Overlay/CanvasLayer/ShopUI" to="." method="_on_shop_ui_close"]
 [connection signal="timeout" from="Timers/BlobTimer" to="." method="_on_blob_timer_timeout"]
