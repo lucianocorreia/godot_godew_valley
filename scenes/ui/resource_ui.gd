@@ -14,12 +14,20 @@ const TEXTURES = {
 
 
 func _ready() -> void:
+	hide()
 	for i: Enum.Item in Data.items.keys():
 		var resource_texture = resource_texture_scene.instantiate()
 		resource_texture.setup(i, TEXTURES[i])
 		$HBoxContainer.add_child(resource_texture)
 
 
-func reveal() -> void:
+func reveal(auto_hide: bool = true) -> void:
 	for child in $HBoxContainer.get_children():
 		child.update()
+	show()
+	if auto_hide:
+		$HideTimer.start()
+
+
+func _on_hide_timer_timeout() -> void:
+	hide()

@@ -76,6 +76,7 @@ func get_basic_input():
 		var dir = Input.get_axis("tool_forward", "tool_backward")
 		current_tool = posmod(current_tool + int(dir), Enum.Tool.size()) as Enum.Tool
 		$ToolUI.reveal(true)
+		get_tree().get_first_node_in_group("ResourceUI").visible = current_tool == Enum.Tool.SEED
 
 	if Input.is_action_just_pressed("seed_forward"):
 		current_seed = posmod(current_seed + 1, Enum.Seed.size()) as Enum.Seed
@@ -124,6 +125,7 @@ func get_building_input() -> void:
 func get_shop_input() -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		close_shop.emit()
+		get_tree().get_first_node_in_group("ResourceUI").hide()
 
 
 func start_fishing(_fish_pos: Vector2) -> void:

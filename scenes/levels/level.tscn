@@ -1304,12 +1304,15 @@ position = Vector2(191, 279)
 [node name="Character" parent="Objects" instance=ExtResource("11_mq31s")]
 position = Vector2(135, 405)
 dialog = Array[String](["I am the hat mouse!", "State yout business"])
+fin_dialog = "You have purchased all the hats"
 texture = ExtResource("12_5mi6g")
 shop_tupe = 1
+has_fin_animation = true
 
 [node name="Character2" parent="Objects" instance=ExtResource("11_mq31s")]
 position = Vector2(296, 349)
 dialog = Array[String](["I sell machines", "Whats would you like?"])
+fin_dialog = "Well done!"
 texture = ExtResource("13_b8j7q")
 
 [node name="Overlay" type="Node2D" parent="."]
